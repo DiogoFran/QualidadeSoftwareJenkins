@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "browserify": "^17.0.0",
-    "cypress": "^12.9.0",
+    "cypress": "^12.12.0",
     "node-static": "^0.7.11",
     "typescript": "^5.0.4"
   }

@@ -20,7 +20,6 @@ async function setupNodeEvents(on, config) {
   return config;
 }
 module.exports = defineConfig({
-  projectId: "2h9k2o",
   e2e: {
     specPattern: "**/*.{cy.js,cy.ts,feature}",
     setupNodeEvents,
