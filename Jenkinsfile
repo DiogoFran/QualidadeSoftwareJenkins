@@ -24,7 +24,7 @@ sourceFiles: '**/*')],
 usePromotionTimestamp: false, 
 useWorkspaceInPromotion: false, 
 verbose: true)])
-}
+}}
 stage('Run automated tests') {
 steps {
 echo 'Running automated tests'
