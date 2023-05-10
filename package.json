@@ -1,0 +1,31 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "node ./serve.js"
+  },
+  "cypress-cucumber-preprocessor": {
+    "stepDefinitions": [
+      "cypress/e2e/[filepath]/**/*.{js,ts}",
+      "cypress/e2e/[filepath].{js,ts}",
+      "cypress/support/step_definitions/**/*.{js,ts}"
+    ]
+  },
+  "dependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^16.0.3",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
+    "@types/react": "^18.0.34",
+    "@types/react-dom": "^18.0.11",
+    "classnames": "^2.3.2",
+    "director": "^1.2.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "todomvc-app-css": "^2.4.2",
+    "todomvc-common": "^1.0.5"
+  },
+  "devDependencies": {
+    "browserify": "^17.0.0",
+    "cypress": "^12.9.0",
+    "node-static": "^0.7.11",
+    "typescript": "^5.0.4"
+  }
+}
