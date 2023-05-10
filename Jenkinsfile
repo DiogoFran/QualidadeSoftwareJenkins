@@ -1,7 +1,7 @@
 pipeline{
 agent any
 stages {
-stage('Build/Deploy app to staging') {
+stage('Build/Deploy app to staging-') {
 steps {
 sshPublisher(
 publishers: [
