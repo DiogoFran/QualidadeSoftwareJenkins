@@ -11,7 +11,7 @@ transfers: [
 sshTransfer(
 cleanRemote: false, 
 excludes: '', 
-execCommand: 'npm install',
+execCommand: 'cd /home/mdiogofrancisco/appFolder && npm install',
 execTimeout: 120000, 
 flatten: false, 
 makeEmptyDirs: false, 
