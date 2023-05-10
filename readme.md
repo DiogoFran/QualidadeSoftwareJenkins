@@ -2,8 +2,7 @@
 
 > The base for this project comes directly from the examples section of the _[Todo MVC Project](https://todomvc.com/)_
 > Cypress is already configured and a scaffold example of spec files was generated.
->
->
+
 ## Learning TypeScript
 
 The [TypeScript website](http://typescriptlang.org) is a great resource for getting started.
