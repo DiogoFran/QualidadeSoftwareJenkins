@@ -1,5 +1,10 @@
 pipeline{
-agent any
+agent {
+    // this image provides everything needed to run Cypress
+    docker {
+      image 'cypress/base:18.14.1'
+    }
+  }
 stages {
 stage('Build/Deploy app to staging') {
 steps {
