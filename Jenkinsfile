@@ -1,31 +1,31 @@
-pipeline{
-agent any
-stages {
-stage('Build/Deploy app to staging-') {
-steps {
-sshPublisher(
-publishers: [
-sshPublisherDesc(
-configName: 'staging', 
-transfers: [
-sshTransfer(
-cleanRemote: false, 
-excludes: '', 
-execCommand: 'cd /home/mdiogofrancisco/appFolder && npm install && npm start',
-execTimeout: 120000, 
-flatten: false, 
-makeEmptyDirs: false, 
-noDefaultExcludes: false, 
-patternSeparator: '[, ]+', 
-remoteDirectory: '', 
-remoteDirectorySDF: false, 
-removePrefix: '', 
-sourceFiles: '**/*')], 
-usePromotionTimestamp: false, 
-useWorkspaceInPromotion: false, 
-verbose: true)])
-}}
- stage('Run automated tests'){
+pipeline {
+    agent any
+    stages {
+        stage('Build/Deploy app to staging-') {
+            steps {
+                sshPublisher(
+                    publishers: [
+                        sshPublisherDesc(
+                        configName: 'staging',
+                        transfers: [
+                            sshTransfer(
+                            cleanRemote: false,
+                            excludes: '',
+                            execCommand: 'cd /home/mdiogofrancisco/appFolder && npm install pm2 && pm2 completion install && npm install && sudo pm2 start ./serve.js',
+                            execTimeout: 120000,
+                            flatten: false,
+                            makeEmptyDirs: false,
+                            noDefaultExcludes: false,
+                            patternSeparator: '[, ]+',
+                            remoteDirectory: '',
+                            remoteDirectorySDF: false,
+                            removePrefix: '',
+                            sourceFiles: '**/*')],
+                        usePromotionTimestamp: false,
+                        useWorkspaceInPromotion: false,
+                    verbose: true)])
+            } }
+        stage('Run automated tests') {
             steps {
                 sh 'npm prune'
                 sh 'npm cache clean --force'
@@ -38,7 +38,7 @@ verbose: true)])
             }
             post {
                 success {
-                    publishHTML (
+                    publishHTML(
                         target : [
                             allowMissing: false,
                             alwaysLinkToLastBuild: true,
@@ -47,19 +47,18 @@ verbose: true)])
                             reportFiles: 'mochawesome.html',
                             reportName: 'My Reports',
                             reportTitles: 'The Report'])
-
                 }
             }
         }
-stage('Perform manual testing') {
-steps {
-echo 'Performing manual testing'
-}
-}
-stage('Release to production') {
-steps {
-echo 'Releasing to production'
-}
-}
-}
-}
+        stage('Perform manual testing') {
+            steps {
+                echo 'Performing manual testing'
+            }
+        }
+        stage('Release to production') {
+            steps {
+                echo 'Releasing to production'
+            }
+        }
+        }
+    }
