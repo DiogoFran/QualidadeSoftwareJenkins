@@ -1,5 +1,6 @@
 {
     "recommendations": [
-        "jmmeessen.jenkins-declarative-support"
+        "jmmeessen.jenkins-declarative-support",
+        "purocean.drawio-preview"
     ]
 }
