@@ -28,16 +28,16 @@ pipeline {
 
         stage('Run automated tests') {
             steps {
-                sh 'echo ${pwd}'
-                sh 'cd /home/mdiogofrancisco/appFolder'
-                sh 'npm prune'
-                sh 'npm cache clean --force'
-                sh 'npm i'
-                sh 'npm install --save-dev mochawesome mochawesome-merge mochawesome-report-generator'
-                sh 'rm -f mochawesome.json'
-                sh 'npx cypress run --reporter mochawesome'
-                sh 'npx mochawesome-merge cypress/results/*.json -o mochawesome-report/mochawesome.json'
-                sh 'npx marge mochawesome-report/mochawesome.json'
+                dir('/home/mdiogofrancisco/appFolder') {
+                    sh 'npm prune'
+                    sh 'npm cache clean --force'
+                    sh 'npm i'
+                    sh 'npm install --save-dev mochawesome mochawesome-merge mochawesome-report-generator'
+                    sh 'rm -f mochawesome.json'
+                    sh 'npx cypress run --reporter mochawesome'
+                    sh 'npx mochawesome-merge cypress/results/*.json -o mochawesome-report/mochawesome.json'
+                    sh 'npx marge mochawesome-report/mochawesome.json'
+                }
             }
             post {
                 success {
