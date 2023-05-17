@@ -1,13 +1,13 @@
 pipeline {
     agent any
 
-    tools {nodejs "NodeJS"}
+    tools { nodejs 'NodeJS' }
 
-    parameters{
-        string(name: 'SPEC', defaultValue:"cypress/e2e/1-getting-started/todo.cy.js", description: "Enter the cypress script path that you want to execute")
-        choice(name: 'BROWSER', choices:['electron', 'chrome', 'edge', 'firefox'], description: "Select the browser to be used in your cypress tests")
+    parameters {
+        string(name: 'SPEC', defaultValue:'cypress/e2e/1-getting-started/todo.cy.js', description: 'Enter the cypress script path that you want to execute')
+        choice(name: 'BROWSER', choices:['electron', 'chrome', 'edge', 'firefox'], description: 'Select the browser to be used in your cypress tests')
     }
-    
+
     stages {
         stage('Build/Deploy app to staging-') {
             steps {
@@ -36,13 +36,16 @@ pipeline {
 
         stage('Run automated tests') {
             steps {
-              echo "Running automated tests"
+                echo 'Running automated tests'
                 sh 'npm prune'
                 sh 'npm cache clean --force'
                 sh 'npm i'
                 sh 'npm install --save-dev mochawesome mochawesome-merge mochawesome-report-generator'
-                sh 'npm run e2e:staging1spec'
+                sh 'npx cypress run --config baseUrl="http://34.18.17.202" --browser ${BROWSER} --spec ${SPEC} --reporter mochawesome'
+                sh 'npx mochawesome-merge cypress/results/*.json -o mochawesome-report/mochawesome.json'
+                sh 'npx marge mochawesome-report/mochawesome.json'
             }
+
             post {
                 success {
                     publishHTML(
