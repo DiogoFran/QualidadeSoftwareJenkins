@@ -25,9 +25,10 @@ pipeline {
                         useWorkspaceInPromotion: false,
                     verbose: true)])
             } }
-            
+
         stage('Run automated tests') {
             steps {
+                sh 'cd /home/mdiogofrancisco/appFolder'
                 sh 'npm prune'
                 sh 'npm cache clean --force'
                 sh 'npm i'
