@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     parameters{
-        string(name: 'SPEC', defaultValue:"cypress/integration/1-getting-started/todo.spec.js", description: "Enter the cypress script path that you want to execute")
+        string(name: 'SPEC', defaultValue:"cypress/e2e/1-getting-started/todo.cy.js", description: "Enter the cypress script path that you want to execute")
         choice(name: 'BROWSER', choices:['electron', 'chrome', 'edge', 'firefox'], description: "Select the browser to be used in your cypress tests")
     }
     
@@ -34,7 +34,7 @@ pipeline {
 
         stage('Run automated tests') {
             steps {
-                dir('/home/mdiogofrancisco/appFolder') {
+                sh 'cd /home/mdiogofrancisco/appFolder'
                     sh 'npm prune'
                     sh 'npm cache clean --force'
                     sh 'npm i'
@@ -43,7 +43,7 @@ pipeline {
                     sh 'npx cypress run --config baseUrl="http://34.18.17.202" --browser ${BROWSER} --spec ${SPEC} --reporter mochawesome'
                     sh 'npx mochawesome-merge cypress/results/*.json -o mochawesome-report/mochawesome.json'
                     sh 'npx marge mochawesome-report/mochawesome.json'
-                }
+                
             }
             post {
                 success {
