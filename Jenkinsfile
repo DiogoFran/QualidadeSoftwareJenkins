@@ -28,6 +28,7 @@ pipeline {
 
         stage('Run automated tests') {
             steps {
+                sh 'echo ${pwd}'
                 sh 'cd /home/mdiogofrancisco/appFolder'
                 sh 'npm prune'
                 sh 'npm cache clean --force'
