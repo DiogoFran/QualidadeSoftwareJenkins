@@ -1,6 +1,8 @@
 pipeline {
     agent any
 
+    tools {nodejs "NodeJS"}
+
     parameters{
         string(name: 'SPEC', defaultValue:"cypress/e2e/1-getting-started/todo.cy.js", description: "Enter the cypress script path that you want to execute")
         choice(name: 'BROWSER', choices:['electron', 'chrome', 'edge', 'firefox'], description: "Select the browser to be used in your cypress tests")
