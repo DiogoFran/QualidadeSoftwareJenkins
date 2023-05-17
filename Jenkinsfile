@@ -18,7 +18,7 @@ pipeline {
                         transfers: [
                             sshTransfer(
                             cleanRemote: false,
-                            excludes: '',
+                            excludes: 'node_modules/,cypress/,**/*.yml',
                             execCommand: 'cd /home/mdiogofrancisco/appFolder && npm install pm2 && pm2 completion install && npm install && sudo pm2 start ./serve.js -f',
                             execTimeout: 120000,
                             flatten: false,
@@ -37,13 +37,13 @@ pipeline {
         stage('Run automated tests') {
             steps {
                 echo 'Running automated tests'
-                /* sh 'npm prune'
+                sh 'npm prune'
                 sh 'npm cache clean --force'
                 sh 'npm i'
                 sh 'npm install --save-dev mochawesome mochawesome-merge mochawesome-report-generator'
                 sh 'npx cypress run --config baseUrl="http://34.18.17.202" --browser ${BROWSER} --spec ${SPEC} --reporter mochawesome'
                 sh 'npx mochawesome-merge cypress/results/*.json -o mochawesome-report/mochawesome.json'
-                sh 'npx marge mochawesome-report/mochawesome.json' */
+                sh 'npx marge mochawesome-report/mochawesome.json'
             }
 
             post {
