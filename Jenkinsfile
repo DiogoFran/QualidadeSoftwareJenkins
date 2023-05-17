@@ -19,7 +19,7 @@ pipeline {
                             sshTransfer(
                             cleanRemote: false,
                             excludes: 'node_modules/,cypress/,**/*.yml',
-                            execCommand: 'cd /home/mdiogofrancisco/appFolder && npm install pm2 && pm2 completion install && npm install && sudo pm2 start ./serve.js -f',
+                            execCommand: 'cd /home/mdiogofrancisco/appFolder && npm install cypress --save-dev && npm install @badeball/cypress-cucumber-preprocessor && npm install @bahmutov/cypress-esbuild-preprocessor && npm install pm2 && pm2 completion install && npm install && sudo pm2 start ./serve.js -f',
                             execTimeout: 120000,
                             flatten: false,
                             makeEmptyDirs: false,
