@@ -17,7 +17,7 @@ pipeline {
                             sshTransfer(
                             cleanRemote: false,
                             excludes: '',
-                            execCommand: 'cd /home/mdiogofrancisco/appFolder && npm install pm2 && pm2 completion install && npm install && sudo pm2 start ./serve.js',
+                            execCommand: 'cd /home/mdiogofrancisco/appFolder && npm install pm2 && pm2 completion install && npm install && sudo pm2 start ./serve.js -f',
                             execTimeout: 120000,
                             flatten: false,
                             makeEmptyDirs: false,
