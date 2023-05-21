@@ -28,7 +28,7 @@ pipeline {
                             remoteDirectory: '',
                             remoteDirectorySDF: false,
                             removePrefix: '',
-                            sourceFiles: '/*')],
+                            sourceFiles: '**/*')],
                         usePromotionTimestamp: false,
                         useWorkspaceInPromotion: false,
                     verbose: true)])
