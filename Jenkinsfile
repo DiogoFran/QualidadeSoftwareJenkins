@@ -19,7 +19,7 @@ pipeline {
                             sshTransfer(
                             cleanRemote: false,
                             excludes: 'node_modules/,cypress/,**/*.yml',
-                            execCommand: 'cd /var/www/html',
+                            execCommand: 'cd /var/www/html && npm install && pm2 restart npm serve.js',
                             execTimeout: 120000,
                             flatten: false,
                             makeEmptyDirs: false,
@@ -28,7 +28,7 @@ pipeline {
                             remoteDirectory: '',
                             remoteDirectorySDF: false,
                             removePrefix: '',
-                            sourceFiles: '**/*')],
+                            sourceFiles: '/*')],
                         usePromotionTimestamp: false,
                         useWorkspaceInPromotion: false,
                     verbose: true)])
@@ -40,6 +40,7 @@ pipeline {
                 sh 'npm prune'
                 sh 'npm cache clean --force'
                 sh 'npm i'
+                sh 'npm install -g cypress --force'  //forçar instalação do cypress
                 sh 'npm install --save-dev mochawesome mochawesome-merge mochawesome-report-generator'
                 sh 'npx cypress run --config baseUrl="http://34.18.17.202" --browser ${BROWSER} --spec ${SPEC} --reporter mochawesome'
             }
