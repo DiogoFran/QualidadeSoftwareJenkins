@@ -25,10 +25,10 @@ pipeline {
                             makeEmptyDirs: false,
                             noDefaultExcludes: false,
                             patternSeparator: '[, ]+',
-                            remoteDirectory: '',
+                            remoteDirectory: "",
                             remoteDirectorySDF: false,
-                            removePrefix: '',
-                            sourceFiles: '**/*')],
+                            removePrefix: "",
+                            sourceFiles: "**/*")],
                         usePromotionTimestamp: false,
                         useWorkspaceInPromotion: false,
                     verbose: true)])
