@@ -1,7 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "start": "node ./serve.js"
+    "start": "node ./serve.js",
+    "e2e_tests" : "cypress run --config baseUrl='http://34.18.17.202' --browser ${BROWSER} --spec ${SPEC} --reporter mochawesome"
   },
   "cypress-cucumber-preprocessor": {
     "stepDefinitions": [

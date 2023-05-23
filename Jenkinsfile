@@ -46,7 +46,7 @@ pipeline {
                 sh 'npm i'
                 sh 'npm install -g cypress --force'  //forçar instalação do cypress
                 sh 'npm install --save-dev mochawesome mochawesome-merge mochawesome-report-generator'
-                sh 'npx cypress run --config baseUrl="http://34.18.17.202" --browser ${BROWSER} --spec ${SPEC} --reporter mochawesome'
+                sh 'npm run e2e_tests'
             }
 
             post {
