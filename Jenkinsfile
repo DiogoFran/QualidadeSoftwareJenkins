@@ -23,7 +23,7 @@ pipeline {
                             sshTransfer(
                             cleanRemote: false,
                             excludes: 'node_modules/,cypress/,**/*.yml',
-                            execCommand: 'cd /vr/www/html && npm install && pm2 restart npm serve.js || pm2 start npm serve.js',
+                            execCommand: 'cd /var/www/html && npm install && pm2 restart npm serve.js || pm2 start npm serve.js',
                             execTimeout: 120000,
                             flatten: false,
                             makeEmptyDirs: false,
