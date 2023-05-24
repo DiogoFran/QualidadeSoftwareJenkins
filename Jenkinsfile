@@ -36,6 +36,8 @@ pipeline {
                         usePromotionTimestamp: false,
                         useWorkspaceInPromotion: false,
                         failOnError: true,
+                        continueOnError:false,
+
                     verbose: true)])
             } }
 
