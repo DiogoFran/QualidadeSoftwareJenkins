@@ -10,6 +10,8 @@ pipeline {
     parameters {
         string(name: 'SPEC', defaultValue:'cypress/e2e/1-getting-started/todo.cy.js', description: 'Enter the cypress script path that you want to execute')
         choice(name: 'BROWSER', choices:['electron', 'chrome', 'edge', 'firefox'], description: 'Select the browser to be used in your cypress tests')
+        booleanParam(name: 'skip_test', defaultValue: true, description: 'Set to true to skip the test stage')
+        
     }
 
     stages {
@@ -67,15 +69,14 @@ pipeline {
             }
         }
         stage('SonarQube analysis') {
+            when { expression { params.skip_test != true } }
             steps {
-                if (true) {
                     script {
                         scannerHome = tool 'sonar-scanner'
                     }
                     withSonarQubeEnv('CloudSonarDiogoFran') { // Replace this name by the one you setup in the SonarQube Jenkins configuration (step 2)
                         sh "${scannerHome}/bin/sonar-scanner"
                     }
-                }
             }
         }
         stage('Quality Gate') {
