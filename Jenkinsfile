@@ -35,6 +35,7 @@ pipeline {
                             sourceFiles: "**/*")],
                         usePromotionTimestamp: false,
                         useWorkspaceInPromotion: false,
+                        failOnError: true,
                     verbose: true)])
             } }
 
