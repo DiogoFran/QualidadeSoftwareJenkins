@@ -11,7 +11,6 @@ pipeline {
         string(name: 'SPEC', defaultValue:'cypress/e2e/1-getting-started/todo.cy.js', description: 'Enter the cypress script path that you want to execute')
         choice(name: 'BROWSER', choices:['electron', 'chrome', 'edge', 'firefox'], description: 'Select the browser to be used in your cypress tests')
         booleanParam(name: 'skip_test', defaultValue: true, description: 'Set to true to skip the test stage')
-        
     }
 
     stages {
@@ -24,7 +23,7 @@ pipeline {
                         transfers: [
                             sshTransfer(
                             cleanRemote: false,
-                            excludes: 'node_modules/,cypress/,**/*.yml',
+                            excludes: 'node_modules/,cypress/,**/*.yml,mochawesome-report/',
                             execCommand: 'cd /var/www/html && npm install && pm2 restart npm serve.js || pm2 start npm serve.js',
                             execTimeout: 120000,
                             flatten: false,
