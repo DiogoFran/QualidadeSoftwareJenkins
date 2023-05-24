@@ -3,7 +3,7 @@ pipeline {
 
     tools { nodejs 'NodeJS' }
 
-    options{
+    options {
         ansiColor('xterm')
     }
 
@@ -29,10 +29,10 @@ pipeline {
                             makeEmptyDirs: false,
                             noDefaultExcludes: false,
                             patternSeparator: '[, ]+',
-                            remoteDirectory: "",
+                            remoteDirectory: '',
                             remoteDirectorySDF: false,
-                            removePrefix: "",
-                            sourceFiles: "**/*")],
+                            removePrefix: '',
+                            sourceFiles: '**/*')],
                         usePromotionTimestamp: false,
                         useWorkspaceInPromotion: false,
                         failOnError: true,
@@ -56,7 +56,7 @@ pipeline {
                 success {
                     publishHTML(
                         target : [
-                            allowMissing: false,  
+                            allowMissing: false,
                             alwaysLinkToLastBuild: true,
                             keepAll: true,
                             reportDir: 'mochawesome-report',
@@ -67,17 +67,18 @@ pipeline {
             }
         }
         stage('SonarQube analysis') {
-          steps {
-            script {
-                      scannerHome = tool 'sonar-scanner';
-                 }
-            withSonarQubeEnv('CloudSonarDiogoFran') { // Replace this name by the one you setup in the SonarQube Jenkins configuration (step 2)
-            sh "${scannerHome}/bin/sonar-scanner"
+            steps {
+                if (true) {
+                    script {
+                        scannerHome = tool 'sonar-scanner'
+                    }
+                    withSonarQubeEnv('CloudSonarDiogoFran') { // Replace this name by the one you setup in the SonarQube Jenkins configuration (step 2)
+                        sh "${scannerHome}/bin/sonar-scanner"
+                    }
+                }
             }
-          }
         }
-
-        stage("Quality Gate") {
+        stage('Quality Gate') {
             steps {
                 timeout(time: 1, unit: 'HOURS') {
                     // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
@@ -87,17 +88,16 @@ pipeline {
             }
         }
         stage('Perform manual testing') {
-              steps {
+            steps {
                 timeout(activity: true, time: 5) {
                     input 'Proceed to production?'
                 }
-           }
+            }
         }
         stage('Release to production') {
             steps {
                 echo 'Releasing to production'
             }
         }
-
         }
     }
